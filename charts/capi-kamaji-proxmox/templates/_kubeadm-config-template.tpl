@@ -9,7 +9,7 @@ joinConfiguration:
       node-labels: {{ .nodePool.labels }}
       {{- end }}
       {{- if and .nodePool (hasKey .nodePool "taints") }}
-      register-with-taints: {{ .nodePool.taints}}
+      register-with-taints: {{ .nodePool.taints }}
       {{- end }}
 {{- if .nodePool.additionalCloudInitFiles }}
 files:
@@ -24,7 +24,7 @@ users:
 - name: {{ .name }}
   shell: {{ .shell }}
   lockPassword: {{ .lockPassword }}
-  sshAuthorizedKeys: {{ .sshAuthorizedKeys }}
+  sshAuthorizedKeys: {{ .sshAuthorizedKeys | quote }}
   sudo: {{ .sudo }}
   {{- with .passwd }}
   passwd: {{ . | quote }}
