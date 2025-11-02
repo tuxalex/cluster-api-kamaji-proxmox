@@ -146,6 +146,10 @@ nodePools:
       - labs
     # -- Proxmox VE resource pool to use
     pool: ""
+    # -- Proxmox VE VM ID range for nodes
+    vmIDRange:
+      start: 200
+      end: 210
     # -- Proxmox VE template ID to clone (alternatively, use TemplateSelector)
     templateId: 100
     # -- Proxmox VE template selector (alternatively, use templateId)
@@ -153,6 +157,8 @@ nodePools:
       # -- Proxmox VE template match tags
       matchTags:
       - "ubuntu-nobe-kube-1.31.4"
+    # -- Proxmox VE skip install guest agent
+    skipQemuGuestAgent: false
     # -- Proxmox VE default network for VMs
     network:
       # -- Proxmox VE network bridge to use
@@ -206,12 +212,16 @@ nodePools:
     preKubeadmCommands: []
     # -- Commands to run after kubeadm command
     postKubeadmCommands: []
-    # -- Define cloud-init format
+    # -- Define cloud-config or ignition (flatcar) format
     cloudInitFormat: cloud-config
     # -- Configuration for ignition (flatcar)
     ignitionConfig: ""
-    # -- Configuration for ignition (flatcar)
+    # -- Configuration for MachineHealthCheck unhealthy node timeout
     unhealthyNodeConditionsTimeout: 300
+    # -- Configuration for MachineHealthCheck max unhealthy node
+    maxUnhealthy: 40%
+    # -- Configuration for MachineHealthCheck node startup timeout 
+    nodeStartupTimeout: 15m
     # -- Labels to add to the node pool when joining the cluster
     #labels: "node.kubernetes.io/node=labs"
     # -- Taints to add to the node pool when joining the cluster

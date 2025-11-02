@@ -3,6 +3,13 @@ allowedNodes:
 {{- range .nodePool.allowedNodes }}
 - {{ . }}
 {{- end }}
+checks:
+  skipQemuGuestAgent: {{ .nodePool.skipQemuGuestAgent }}
+  {{- if .nodePool.cloudInitFormat == "cloud-config" }}
+  skipCloudInitStatus: false
+  {{- else }}
+  skipCloudInitStatus: true
+  {{- end -}}
 disks:
   bootVolume:
     disk: {{ .nodePool.disks.bootVolume.disk }}
@@ -29,6 +36,9 @@ numCores: {{ .nodePool.numCores }}
 numSockets: {{ .nodePool.numSockets }}
 sourceNode: {{ .nodePool.sourceNode }}
 pool: {{ .nodePool.pool }}
+vmIDRange:
+  start: {{ .nodePool.vmIDRange.start }}
+  end: {{ .nodePool.vmIDRange.end }}
 {{- if .nodePool.templateId }}
 templateID: {{ .nodePool.templateId }}
 {{- else }}

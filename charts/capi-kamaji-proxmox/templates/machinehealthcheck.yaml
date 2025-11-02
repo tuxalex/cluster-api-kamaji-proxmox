@@ -8,6 +8,8 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   clusterName: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
+  maxUnhealthy: {{ .Values.nodePools.maxUnhealthy }}
+  nodeStartupTimeout: {{ .Values.nodePools.nodeStartupTimeout }}
   selector:
     matchLabels:
       cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
@@ -19,4 +21,4 @@ spec:
       timeoutSeconds: {{ .Values.nodePools.unhealthyNodeConditionsTimeout }}
     - type: Ready
       status: "False"
-      timeoutSeconds: 300
+      timeoutSeconds: {{ .Values.nodePools.unhealthyNodeConditionsTimeout }}
