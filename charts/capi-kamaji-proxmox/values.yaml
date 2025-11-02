@@ -219,7 +219,7 @@ nodePools:
     # -- Configuration for MachineHealthCheck unhealthy node timeout
     unhealthyNodeConditionsTimeout: 300
     # -- Configuration for MachineHealthCheck max unhealthy node
-    maxUnhealthy: 40%
+    maxUnhealthy: "40%"
     # -- Configuration for MachineHealthCheck node startup timeout 
     nodeStartupTimeout: 15m
     # -- Labels to add to the node pool when joining the cluster

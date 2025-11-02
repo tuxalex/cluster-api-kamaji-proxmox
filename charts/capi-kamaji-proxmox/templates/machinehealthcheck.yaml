@@ -1,24 +1,12 @@
+{{- range .Values.nodePools }}
 ---
 apiVersion: cluster.x-k8s.io/v1beta2
 kind: MachineHealthCheck
 metadata:
-   labels:
+  labels:
     cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
-  name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ }}-{{ .name }}-machine-health-check-{{ include "machineHealthCheckHash" (dict "nodePool" . "Global" $) }}
+  namespace: {{ $.Release.Namespace }}
 spec:
-  clusterName: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
-  maxUnhealthy: {{ .Values.nodePools.maxUnhealthy }}
-  nodeStartupTimeout: {{ .Values.nodePools.nodeStartupTimeout }}
-  selector:
-    matchLabels:
-      cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
-      node-role.kubernetes.io/node: ""
-  checks:
-    unhealthyNodeConditions:
-    - type: Ready
-      status: Unknown
-      timeoutSeconds: {{ .Values.nodePools.unhealthyNodeConditionsTimeout }}
-    - type: Ready
-      status: "False"
-      timeoutSeconds: {{ .Values.nodePools.unhealthyNodeConditionsTimeout }}
+{{ include "machineHealthCheckSpec" (dict "nodePool" . "Global" $) | indent 2 }}
+{{- end }}

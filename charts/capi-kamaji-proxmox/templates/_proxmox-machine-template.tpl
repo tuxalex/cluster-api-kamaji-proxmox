@@ -5,11 +5,11 @@ allowedNodes:
 {{- end }}
 checks:
   skipQemuGuestAgent: {{ .nodePool.skipQemuGuestAgent }}
-  {{- if .nodePool.cloudInitFormat == "cloud-config" }}
+  {{- if eq .nodePool.cloudInitFormat "cloud-config" }}
   skipCloudInitStatus: false
   {{- else }}
   skipCloudInitStatus: true
-  {{- end -}}
+  {{- end }}
 disks:
   bootVolume:
     disk: {{ .nodePool.disks.bootVolume.disk }}
