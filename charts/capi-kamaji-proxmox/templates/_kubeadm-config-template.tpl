@@ -4,12 +4,15 @@ joinConfiguration:
     name: {{`'{{ local_hostname }}'`}}
     criSocket: /var/run/containerd/containerd.sock
     kubeletExtraArgs:
-      provider-id: proxmox://{{`'{{ ds.meta_data.instance_id }}'`}}
+      - name: provider-id
+        value: proxmox://{{`'{{ ds.meta_data.instance_id }}'`}}
       {{- if and .nodePool (hasKey .nodePool "labels") }}
-      node-labels: {{ .nodePool.labels }}
+       - name: node-labels
+         value: {{ .nodePool.labels }}
       {{- end }}
       {{- if and .nodePool (hasKey .nodePool "taints") }}
-      register-with-taints: {{ .nodePool.taints }}
+      - name: register-with-taints
+        value: {{ .nodePool.taints }}
       {{- end }}
 {{- if .nodePool.additionalCloudInitFiles }}
 files:
@@ -24,7 +27,7 @@ users:
 - name: {{ .name }}
   shell: {{ .shell }}
   lockPassword: {{ .lockPassword }}
-  sshAuthorizedKeys: {{ .sshAuthorizedKeys | quote }}
+  sshAuthorizedKeys: {{ .sshAuthorizedKeys }}
   sudo: {{ .sudo }}
   {{- with .passwd }}
   passwd: {{ . | quote }}
