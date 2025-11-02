@@ -201,8 +201,20 @@ nodePools:
       sshAuthorizedKeys: []
       # -- sudoers configuration
       sudo: ALL=(ALL) NOPASSWD:ALL
+    
+    # -- Commands to run before kubeadm command
+    preKubeadmCommands: []
+    # -- Commands to run after kubeadm command
+    postKubeadmCommands: []
+    # -- Define cloud-init format
+    cloudInitFormat: cloud-config
+    # -- Configuration for ignition (flatcar)
+    ignitionConfig: ""
+    # -- Configuration for ignition (flatcar)
+    unhealthyNodeConditionsTimeout: 300
     # -- Labels to add to the node pool when joining the cluster
     #labels: "node.kubernetes.io/node=labs"
     # -- Taints to add to the node pool when joining the cluster
     #taints: "node.kubernetes.io/node=labs:NoSchedule"
+  
 

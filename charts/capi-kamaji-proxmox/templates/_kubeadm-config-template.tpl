@@ -4,12 +4,15 @@ joinConfiguration:
     name: {{`'{{ local_hostname }}'`}}
     criSocket: /var/run/containerd/containerd.sock
     kubeletExtraArgs:
-      provider-id: proxmox://{{`'{{ ds.meta_data.instance_id }}'`}}
+      - name: provider-id
+        value: proxmox://{{`'{{ ds.meta_data.instance_id }}'`}}
       {{- if and .nodePool (hasKey .nodePool "labels") }}
-      node-labels: {{ .nodePool.labels }}
+      - name: node-labels
+       value: {{ .nodePool.labels }}
       {{- end }}
       {{- if and .nodePool (hasKey .nodePool "taints") }}
-      register-with-taints: {{ .nodePool.taints}}
+      - name: register-with-taints
+        value: {{ .nodePool.taints}}
       {{- end }}
 {{- if .nodePool.additionalCloudInitFiles }}
 files:
@@ -24,6 +27,20 @@ users:
   - {{- toYaml . | nindent 4 }}
 {{- end }}
 {{- end }}
+{{- range .nodePool.preKubeadmCommands }}
+  - {{- toYaml . | nindent 4 }}
+{{- end }}
+{{- range .nodePool.postKubeadmCommands }}
+  - {{- toYaml . | nindent 4 }}
+{{- end }}
+{{- if .nodePool.cloudInitFormat }}
+format: {{ .nodePool.cloudInitFormat | default "cloud-config" }}
+{{- end }}
+{{- if eq .nodePool.cloudInitFormat "ignition" }}
+ignition:
+  containerLinuxConfig:
+    additionalConfig: |-
+      {{ .nodePool.ignitionConfig | quote | nindent 6 |}}
 {{- end }}
 
 {{/*

@@ -1,7 +1,7 @@
 {{- range .Values.nodePools }}
 ---
 kind: KubeadmConfigTemplate
-apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta2
 metadata:
   labels:
     cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
