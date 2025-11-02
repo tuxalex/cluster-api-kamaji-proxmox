@@ -21,7 +21,14 @@ files:
 {{- if .nodePool.users }}
 users:
 {{- range .nodePool.users }}
-  - {{- toYaml . | nindent 4 }}
+- name: {{ .name }}
+  shell: {{ .shell }}
+  lockPassword: {{ .lockPassword }}
+  sshAuthorizedKeys: {{ .sshAuthorizedKeys }}
+  sudo: {{ .sudo }}
+  {{- with .passwd }}
+  passwd: {{ . | quote }}
+  {{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
