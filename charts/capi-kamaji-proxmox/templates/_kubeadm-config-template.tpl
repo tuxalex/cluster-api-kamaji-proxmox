@@ -1,11 +1,10 @@
 {{- define "kubeadmConfigTemplateSpec" -}}
 joinConfiguration:
   nodeRegistration:
-    name: {{`'{{ local_hostname }}'`}}
     criSocket: /var/run/containerd/containerd.sock
     kubeletExtraArgs:
       - name: provider-id
-        value: proxmox://{{`'{{ ds.meta_data.instance_id }}'`}}
+        value: proxmox://{{`'${COREOS_CUSTOM_INSTANCE_ID}'`}}
       {{- if and .nodePool (hasKey .nodePool "labels") }}
        - name: node-labels
          value: {{ .nodePool.labels }}
