@@ -3,8 +3,13 @@ joinConfiguration:
   nodeRegistration:
     criSocket: /var/run/containerd/containerd.sock
     kubeletExtraArgs:
+      {{- if eq .nodePool.cloudInitFormat "ignition" }}
       - name: provider-id
         value: proxmox://{{`'${COREOS_CUSTOM_INSTANCE_ID}'`}}
+      {{- else }}
+      - name: provider-id
+        value: proxmox://{{`'{{ ds.meta_data.instance_id }}'`}}
+      {{- end }}
       {{- if and .nodePool (hasKey .nodePool "labels") }}
        - name: node-labels
          value: {{ .nodePool.labels }}
