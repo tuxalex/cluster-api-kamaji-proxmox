@@ -1,5 +1,6 @@
 {{- range .Values.nodePools }}
-{{- if .machineHealthCheck.enabled }}
+{{- with .machineHealthCheck }}
+{{- if .enabled }}
 ---
 apiVersion: cluster.x-k8s.io/v1beta2
 kind: MachineHealthCheck
@@ -10,5 +11,6 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
 {{ include "machineHealthCheckSpec" (dict "nodePool" . "Global" $) | indent 2 }}
+{{- end }}
 {{- end }}
 {{- end }}
