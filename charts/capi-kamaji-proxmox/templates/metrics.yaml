@@ -4,7 +4,7 @@ kind: Service
 metadata:
   labels:
     kamaji.clastix.io/name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}-metrics
-    cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
+    #cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
   name:  {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}-metrics
   namespace: {{ .Release.Namespace }}
 spec:
@@ -30,7 +30,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     release: kube-prometheus-stack
-    cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
+    #cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
   name:  {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}-service-monitor
   namespace: {{ .Release.Namespace }}
 spec:
@@ -113,7 +113,7 @@ kind: RoleBinding
 metadata:
   name:  {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}-prometheus-secret-access
   labels:
-    cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
+    #cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
   namespace: {{ .Release.Namespace }}
 subjects:
 - kind: ServiceAccount
@@ -129,7 +129,7 @@ kind: Role
 metadata:
   name:  {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}-prometheus-secret-reader
   labels:
-    cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
+    #cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
   namespace: {{ .Release.Namespace }}
 rules:
 - apiGroups: [""]
