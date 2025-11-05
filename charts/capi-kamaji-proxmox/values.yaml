@@ -129,6 +129,9 @@ nodePools:
   - name: default
     # -- Number of worker VMs instances
     replicas: 1
+    # -- Experimental: Enable machine health check resources (doesn't work)
+    machineHealthCheck:
+      enabled: false
     autoscaling:
       # -- Enable autoscaling
       enabled: false
@@ -157,7 +160,7 @@ nodePools:
       # -- Proxmox VE template match tags
       matchTags:
       - "ubuntu-nobe-kube-1.31.4"
-    # -- Proxmox VE skip install guest agent
+    # Proxmox VE skip check guest agent install
     skipQemuGuestAgent: false
     # -- Proxmox VE default network for VMs
     network:
