@@ -1,6 +1,6 @@
 name: capi-kamaji-proxmox
-version: 0.0.4
-appVersion: 1.31.4
+version: 0.0.5
+appVersion: 1.33.5
 description: A Helm chart for deploying a Kamaji Tenant Cluster on Proxmox VE using Cluster API
   and Kamaji.
 icon: https://raw.githubusercontent.com/clastix/cluster-api-kamaji-proxmox/master/assets/proxmox-icon.png
