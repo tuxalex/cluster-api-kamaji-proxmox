@@ -38,6 +38,12 @@ spec:
     kind: KamajiControlPlane
     name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}
   infrastructureRef:
+    {{- if .Values.cluster.useProxmoxClusterTemplateResource }}
+    apiGroup: infrastructure.cluster.x-k8s.io
+    kind: ProxmoxClusterTemplate
+    name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}-proxmox-cluster-{{ include "ProxmoxClusterTemplateHash" . }}
+    {{- else }}
     apiGroup: infrastructure.cluster.x-k8s.io
     kind: ProxmoxCluster
     name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}
+    {{- end }}

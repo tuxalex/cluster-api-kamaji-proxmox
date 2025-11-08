@@ -1,4 +1,4 @@
-{{- if not .Values.useProxmoxClusterTemplateCR }}
+{{- if not .Values.cluster.useProxmoxClusterTemplateResource }}
 kind: ProxmoxCluster
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 metadata:

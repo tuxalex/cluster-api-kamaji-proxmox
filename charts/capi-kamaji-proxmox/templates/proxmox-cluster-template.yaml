@@ -1,4 +1,4 @@
-{{- if  .Values.useProxmoxClusterTemplateCR }}
+{{- if .Values.cluster.useProxmoxClusterTemplateResource }}
 kind: ProxmoxClusterTemplate
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
 metadata:
@@ -9,19 +9,5 @@ metadata:
 spec:
   template:
     spec:
-      credentialsRef:
-        name: {{ .Values.proxmox.secret.name }}
-        namespace: {{ .Values.proxmox.secret.namespace | default .Release.Namespace }}
-      externalManagedControlPlane: true
-      controlPlaneEndpoint:
-        host: {{ .Values.cluster.controlPlane.network.serviceAddress }}
-        port: {{ .Values.cluster.clusterNetwork.apiServerPort }}
-      dnsServers:
-      {{- range .Values.cluster.dnsServers }}
-      - {{ . }}
-      {{- end }}
-      allowedNodes:
-      {{- range .Values.cluster.allowedNodes }}
-      - {{ . }}
-     {{- end }}
+{{ include "ProxmoxClusterTemplateSpec" . | indent 6 }}
 {{- end }}
