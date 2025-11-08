@@ -21,7 +21,7 @@ cluster:
   # -- Cluster name. If unset, the release name will be used
   name: ""
   # -- Define cluster with Proxmox cluster template resources or not
-  useProxmoxClusterTemplateResource: true
+  useProxmoxClusterTemplateResource: false
    # -- Proxmox cluster network configuration
   clusterNetwork:
     # -- API Server port
@@ -113,15 +113,6 @@ cluster:
   # -- List of nameservers used by the machines
   dnsServers:
     - 8.8.8.8
-  # -- IPv4Config contains information about address pool
-  ipv4Config:
-    # -- Proxmox VE machines address pool
-    addresses: 
-    - 192.168.100.10
-    # -- Proxmox VE machines gateway
-    gateway: 192.168.100.1
-    # -- Proxmox VE machines prefix
-    prefix: 24
   metrics:
     # -- Enable metrics collection. ServiceMonitor custom resource definition must be installed on the Management cluster.
     enabled: false
