@@ -1,0 +1,25 @@
+kind: ProxmoxClusterTemplate
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+metadata:
+  labels:
+    cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . | quote }}
+  name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}-proxmox-cluster-{{ include "ProxmoxClusterTemplateHash" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  template:
+    spec:
+      credentialsRef:
+        name: {{ .Values.proxmox.secret.name }}
+        namespace: {{ .Values.proxmox.secret.namespace | default .Release.Namespace }}
+      externalManagedControlPlane: true
+      controlPlaneEndpoint:
+        host: {{ .Values.cluster.controlPlane.network.serviceAddress }}
+        port: {{ .Values.cluster.clusterNetwork.apiServerPort }}
+      dnsServers:
+      {{- range .Values.cluster.dnsServers }}
+      - {{ . }}
+      {{- end }}
+      allowedNodes:
+      {{- range .Values.cluster.allowedNodes }}
+      - {{ . }}
+      {{- end }}

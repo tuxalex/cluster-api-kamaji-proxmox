@@ -19,12 +19,10 @@ format: {{ .nodePool.format }}
 full: true
 network:
   default:
-    {{- if and .nodePool.network.addressesFromPools .nodePool.network.addressesFromPools.enabled }}
     ipv4PoolRef:
       apiGroup: ipam.cluster.x-k8s.io
       kind: InClusterIPPool
       name: {{ include "cluster-api-kamaji-proxmox.cluster-name" .Global }}-ipam-ip-pool
-    {{- end }}
     dnsServers:
     {{- range .nodePool.network.dnsServers }}
     - {{ . }}

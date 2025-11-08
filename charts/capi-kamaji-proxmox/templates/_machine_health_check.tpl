@@ -2,7 +2,7 @@
 clusterName: {{ include "cluster-api-kamaji-proxmox.cluster-name" .Global }}
 selector:
   matchLabels:
-      #cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" .Global }}
+      cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" .Global }}
       node-role.kubernetes.io/node: ""
 checks:
   nodeStartupTimeoutSeconds: {{ .nodePool.nodeStartupTimeout }}
