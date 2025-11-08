@@ -20,8 +20,6 @@ ipamProvider:
 cluster:
   # -- Cluster name. If unset, the release name will be used
   name: ""
-  # -- Define cluster with Proxmox cluster template resources or not
-  useProxmoxClusterTemplateResource: false
    # -- Proxmox cluster network configuration
   clusterNetwork:
     # -- API Server port
