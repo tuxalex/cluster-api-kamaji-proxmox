@@ -22,6 +22,7 @@ cluster:
   name: ""
   # -- Define cluster with Proxmox cluster template resources or not
   useProxmoxClusterTemplateCR: false
+   # -- Proxmox cluster network configuration
   clusterNetwork:
     # -- API Server port
     apiServerPort: 6443
@@ -33,7 +34,8 @@ cluster:
     services: 
       # -- CIDR range for services
       cidrBlocks: ["10.96.0.0/16"]
-  applyResources:
+  # -- Apply ressources via cluster clusterRessourceSet (see value customRessources)
+  clusterResources:
     - name: flannel
       kind: ConfigMap
   controlPlane:
@@ -136,7 +138,7 @@ nodePools:
     replicas: 1
     # -- Enable machine health check resources (doesn't work)
     machineHealthCheck:
-      enabled: false
+      enabled: true
     autoscaling:
       # -- Enable autoscaling
       enabled: false
