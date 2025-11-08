@@ -1,0 +1,17 @@
+apiVersion: addons.cluster.x-k8s.io/v1beta2
+kind: ClusterResourceSet
+metadata:
+  labels:
+    cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . | quote }}
+  name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}-apply-ressources
+  namespace: {{ .Release.Namespace }}
+spec:
+  strategy: Reconcile
+  clusterSelector:
+    matchLabels:
+      cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . | quote }}
+  resources:
+    {{- range .Values.cluster.applyResources }}
+    - name: {{ .name }}
+      kind: {{ .kind }}
+    {{- end }}
