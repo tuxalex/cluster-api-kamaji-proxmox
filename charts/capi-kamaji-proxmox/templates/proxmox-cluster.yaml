@@ -11,6 +11,13 @@ spec:
     name: {{ .Values.proxmox.secret.name }}
     namespace: {{ .Values.proxmox.secret.namespace | default .Release.Namespace }}
   externalManagedControlPlane: true
+  ipv4Config:
+    addresses:
+    {{- range .Values.cluster.ipv4Config.addresses }}
+    - {{ . }}
+    {{- end }}
+    gateway: {{ .Values.cluster.ipv4Config.gateway }}
+    prefix: {{ .Values.cluster.ipv4Config.prefix }}
   dnsServers:
   {{- range .Values.cluster.dnsServers }}
   - {{ . }}
