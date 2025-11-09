@@ -4,7 +4,7 @@ metadata:
   name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . | quote }}
+    #cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" . | quote }}
     {{- with .Values.cluster.controlPlane.labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
