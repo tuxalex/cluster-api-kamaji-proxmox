@@ -7,3 +7,8 @@
 {{- define "cluster-api-kamaji-proxmox.cluster-name" -}}
 {{- default .Release.Name .Values.cluster.name | trunc 63 | trimSuffix "-" }}
 {{- end -}}
+
+{{/* cluster version */}}
+{{- define "cluster-api-kamaji-proxmox.cluster-version" -}}
+{{- default .Values.cluster.version  }}
+{{- end -}}
