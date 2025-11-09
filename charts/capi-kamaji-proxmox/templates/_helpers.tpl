@@ -10,5 +10,5 @@
 
 {{/* cluster version */}}
 {{- define "cluster-api-kamaji-proxmox.cluster-version" -}}
-{{- default .Values.cluster.version  }}
+{{- default .Values.cluster.controlPlane.version }}
 {{- end -}}
