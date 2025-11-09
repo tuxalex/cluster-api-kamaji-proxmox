@@ -42,7 +42,7 @@ spec:
           kind: KubeadmConfigTemplate
           name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ }}-{{ .name }}-kubeadmconfig-{{ include "kubeadmConfigTemplateHash" (dict "nodePool" .) }}
       clusterName: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
-      version: {{ include "cluster-api-kamaji-proxmox.version" $ | quote }}
+      version: {{ include "cluster-api-kamaji-proxmox.cluster-version" $ | quote }}
       infrastructureRef:
         apiGroup: infrastructure.cluster.x-k8s.io
         kind: ProxmoxMachineTemplate
