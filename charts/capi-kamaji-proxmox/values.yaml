@@ -227,7 +227,7 @@ nodePools:
     # -- Configuration for MachineHealthCheck unhealthy node timeout
     unhealthyNodeConditionsTimeout: 300
     # -- Configuration for MachineHealthCheck node startup timeout 
-    nodeStartupTimeout: 6000
+    nodeStartupTimeout: 600
     # -- Labels to add to the node pool when joining the cluster
     #labels: "node.kubernetes.io/node=labs"
     # -- Taints to add to the node pool when joining the cluster
