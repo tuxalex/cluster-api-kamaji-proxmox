@@ -1,16 +1,14 @@
 {{- range .Values.nodePools }}
-{{- with .machineHealthCheck }}
-{{- if .enabled }}
+{{- if .machineHealthCheck.enabled }}
 ---
 apiVersion: cluster.x-k8s.io/v1beta2
 kind: MachineHealthCheck
 metadata:
   labels:
-    #cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
+    cluster.x-k8s.io/cluster-name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ | quote }}
   name: {{ include "cluster-api-kamaji-proxmox.cluster-name" $ }}-{{ .name }}-machine-health-check-{{ include "machineHealthCheckHash" (dict "nodePool" . "Global" $) }}
   namespace: {{ $.Release.Namespace }}
 spec:
 {{ include "machineHealthCheckSpec" (dict "nodePool" . "Global" $) | indent 2 }}
-{{- end }}
 {{- end }}
 {{- end }}
