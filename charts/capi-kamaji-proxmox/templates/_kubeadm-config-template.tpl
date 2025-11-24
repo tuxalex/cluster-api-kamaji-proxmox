@@ -18,6 +18,8 @@ joinConfiguration:
       - name: register-with-taints
         value: {{ .nodePool.taints }}
       {{- end }}
+      - name: cloud-provider
+        value: external
 {{- if .nodePool.additionalCloudInitFiles }}
 files:
 - path: "/etc/cloud/cloud.cfg.d/99-custom.cfg"
